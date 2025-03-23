@@ -1,0 +1,42 @@
+{
+  "name": "gps",
+  "displayName": "GeoGuessr Popular Scripts",
+  "version": "0.0.1",
+  "description": "Bundle of popular userscripts for GeoGuessr.",
+  "author": "Posio",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "plasmo": "0.90.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@types/chrome": "0.0.258",
+    "@types/node": "20.11.5",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "prettier": "3.2.4",
+    "typescript": "5.3.3"
+  },
+  "manifest": {
+    "host_permissions": [
+      "https://www.geoguessr.com/*"
+    ],
+    "default_locale": "en",
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/*"
+        ],
+        "matches": [
+          "https://www.geoguessr.com/*"
+        ]
+      }
+    ]
+  }
+}
