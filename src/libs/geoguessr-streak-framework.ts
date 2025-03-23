@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 // declare let unsafeWindow: Window
 
 type GSF_State = {
@@ -24,6 +21,7 @@ type GSF_Options = {
   only_match_country_code: boolean
   query_openstreetmap: boolean
   address_matches?: string[]
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   custom_match_function?: Function
   keyboard_shortcuts: {
     reset: string
@@ -157,7 +155,12 @@ export class GeoGuessrStreakFramework {
 
       const addEvents = () => {
         const el = document.querySelector("#__next")
-        if (!el) return
+        if (!el) {
+          console.log("ここ通っているのでは") // TODO:
+          return
+        }
+
+        console.log("ここ通っていないのでは") // TODO: > ここは通っているようだ
 
         const observer = new MutationObserver(this.checkState.bind(this))
         observer.observe(el, { subtree: true, childList: true })
@@ -171,6 +174,7 @@ export class GeoGuessrStreakFramework {
         const event_name =
           this.options.streak_type === "game" ? "game_end" : "round_end"
 
+        // TODO: これが呼ばれていない?
         GEF.events.addEventListener(event_name, (event) => {
           this.should_update_summary_panel = true
           this.stopRound(event.detail)
@@ -343,6 +347,7 @@ export class GeoGuessrStreakFramework {
   private async queryOSM(location: {
     lat: number | null
     lng: number | null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   }): Promise<any> {
     const apiUrl = `https://nominatim.openstreetmap.org/reverse.php?lat=${location.lat}&lon=${location.lng}&zoom=18&format=jsonv2&accept-language=${this.options.language}`
 
@@ -356,12 +361,14 @@ export class GeoGuessrStreakFramework {
     )
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private matchCountryCode(address: any): string | null {
     const cc = address?.country_code?.toUpperCase()
     if (!cc) return null
     return CC_DICT[cc] || cc
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private matchAddress(address: any): string {
     if (
       address &&
@@ -377,6 +384,8 @@ export class GeoGuessrStreakFramework {
   }
 
   private async stopRound(eventState): Promise<void> {
+    console.log(`stopRound: ${JSON.stringify(eventState)}`) // TODO:
+
     if (this.isAutoStreakDisabled(eventState)) return
 
     this.updateStreakPanels()
@@ -409,6 +418,8 @@ export class GeoGuessrStreakFramework {
     this.state.checking_api = true
 
     if (this.options.query_openstreetmap) {
+      console.log(`query_openstreetmap: `) // TODO:
+
       this.updateStreakPanels()
       const responseGuess = await this.queryOSM(round.player_guess)
       const responseLocation = await this.queryOSM(round.location)

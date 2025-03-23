@@ -1,10 +1,16 @@
-/* eslint-disable */
-// @ts-nocheck
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // declare let unsafeWindow: Window
 // const THE_WINDOW: any = unsafeWindow || window
 
-const THE_WINDOW = window
+interface TheWindow extends Window {
+  GEFFetchEvents: EventTarget
+  __NEXT_DATA__: any
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const THE_WINDOW: TheWindow = window
 
 type GeoRoundLocation = {
   lat: number | undefined
@@ -80,6 +86,7 @@ export class GEF {
     this.loadState()
     this.initFetchEvents()
     this.overrideFetch()
+    // TODO: asyncなので? 外からawaitで別途呼んでいるのでいいのかもしれない
     this.init()
 
     THE_WINDOW.addEventListener("load", () => {
@@ -94,6 +101,8 @@ export class GEF {
     })
 
     THE_WINDOW.GEFFetchEvents.addEventListener("received_data", (event) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.parseData(event.detail)
     })
   }
@@ -104,6 +113,8 @@ export class GEF {
   }
 
   private overrideFetch(): void {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     if (THE_WINDOW.fetch.isGEFFetch) return
 
     const default_fetch = THE_WINDOW.fetch
@@ -129,6 +140,8 @@ export class GEF {
       }
     })()
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     THE_WINDOW.fetch.isGEFFetch = true
   }
 

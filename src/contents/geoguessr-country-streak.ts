@@ -5,7 +5,7 @@ import { GeoGuessrStreakFramework } from "~src/libs/geoguessr-streak-framework"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.geoguessr.com/*"],
-  run_at: "document_idle",
+  run_at: "document_start", // TODO: document-startにしたら動くかも? > 正解。動いた
   // windowの下にいろいろと生やすので必要
   world: "MAIN"
 }
@@ -50,7 +50,10 @@ const KEYBOARD_SHORTCUTS = {
 /* ##### DON'T MODIFY ANYTHING BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ##### */
 /* ############################################################################### */
 
+// I modified the original script cuz I know what I'm doing
+
 // こっちを最初に読み込まないとエラーが出る
+// もとは (function() {})() なので当然だが
 if (!window["GeoGuessrEventFramework"]) {
   window["GeoGuessrEventFramework"] = new GEF()
   console.log(
