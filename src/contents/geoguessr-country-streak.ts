@@ -10,7 +10,25 @@ export const config: PlasmoCSConfig = {
   world: "MAIN"
 }
 
-// https://github.com/miraclewhips/geoguessr-userscripts/blob/master/geoguessr-country-streak.user.js
+/* 
+# Migration Notes
+
+ref: https://github.com/miraclewhips/geoguessr-userscripts/blob/master/geoguessr-country-streak.user.js
+
+- EventFrameworkとStreakFrameworkをコピーして持ってくる
+- StreakFramework
+  - unsafeWindowを使っているので、windowを使うように変更
+  - GeoGuessrStreakFrameworkをexport
+  - eslintのエラーを解消
+- EventFramework
+  - unsafeWindowを使っているので、windowを使うように変更
+  - eslintのエラーを解消
+  - 即時実行をコメントアウトして、GEFだけ残す
+  - GEFをexport
+  - 初期化処理はここで行うように変更
+- GeoGuessrEventFrameworkの初期化処理をここに追加
+
+*/
 
 // ==UserScript==
 // @name         GeoGuessr Country Streak
