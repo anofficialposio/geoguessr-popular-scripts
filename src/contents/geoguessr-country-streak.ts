@@ -5,7 +5,7 @@ import { GeoGuessrStreakFramework } from "~src/libs/geoguessr-streak-framework"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.geoguessr.com/*"],
-  run_at: "document_start", // TODO: document-startにしたら動くかも? > 正解。動いた
+  run_at: "document_start",
   // windowの下にいろいろと生やすので必要
   world: "MAIN"
 }

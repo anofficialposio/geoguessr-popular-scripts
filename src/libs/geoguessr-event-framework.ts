@@ -86,7 +86,6 @@ export class GEF {
     this.loadState()
     this.initFetchEvents()
     this.overrideFetch()
-    // TODO: asyncなので? 外からawaitで別途呼んでいるのでいいのかもしれない
     this.init()
 
     THE_WINDOW.addEventListener("load", () => {

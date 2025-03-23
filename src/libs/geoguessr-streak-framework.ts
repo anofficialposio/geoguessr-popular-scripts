@@ -156,11 +156,9 @@ export class GeoGuessrStreakFramework {
       const addEvents = () => {
         const el = document.querySelector("#__next")
         if (!el) {
-          console.log("ここ通っているのでは") // TODO:
+          console.log("Element not found")
           return
         }
-
-        console.log("ここ通っていないのでは") // TODO: > ここは通っているようだ
 
         const observer = new MutationObserver(this.checkState.bind(this))
         observer.observe(el, { subtree: true, childList: true })
@@ -174,7 +172,6 @@ export class GeoGuessrStreakFramework {
         const event_name =
           this.options.streak_type === "game" ? "game_end" : "round_end"
 
-        // TODO: これが呼ばれていない?
         GEF.events.addEventListener(event_name, (event) => {
           this.should_update_summary_panel = true
           this.stopRound(event.detail)
@@ -384,8 +381,6 @@ export class GeoGuessrStreakFramework {
   }
 
   private async stopRound(eventState): Promise<void> {
-    console.log(`stopRound: ${JSON.stringify(eventState)}`) // TODO:
-
     if (this.isAutoStreakDisabled(eventState)) return
 
     this.updateStreakPanels()
@@ -418,8 +413,6 @@ export class GeoGuessrStreakFramework {
     this.state.checking_api = true
 
     if (this.options.query_openstreetmap) {
-      console.log(`query_openstreetmap: `) // TODO:
-
       this.updateStreakPanels()
       const responseGuess = await this.queryOSM(round.player_guess)
       const responseLocation = await this.queryOSM(round.location)
