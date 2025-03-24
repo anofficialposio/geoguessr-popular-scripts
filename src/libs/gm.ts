@@ -4,11 +4,13 @@
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+// ref: https://github.com/greasemonkey/greasemonkey/blob/8a51d1432e8c1adbd761d2654b030e11efc11b74/src/bg/api-provider-source.js#L184-L199
 export const GM_openInTab = (url: string, openInBackground: boolean) => {
   const asyncFunc = async () => {
-    // TODO: main worldからはchrome.runtimeが使えないし、sendToBackgroundも使えない
+    // https://docs.plasmo.com/framework/messaging
+    // Your extension's id can be found in chrome's extension manager window once you've built and added it to your browser.
+    // TODO: いや、やっぱり動かんな
     // https://github.com/PlasmoHQ/plasmo/issues/823
-    const extensionId = chrome.runtime.id
 
     const res = await sendToBackground({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -18,7 +20,7 @@ export const GM_openInTab = (url: string, openInBackground: boolean) => {
         url: url,
         active: !openInBackground
       },
-      extensionId
+      extensionId: "momdigjeoepdfkbhnhcoifhjpibiodke" // TODO: これはproduction buildでも同じなの? > 違う
     })
     console.log("GM_openInTab: res", res)
   }
