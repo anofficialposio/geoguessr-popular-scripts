@@ -12,6 +12,7 @@
     "upgrade": "git pull && git fetch -p && npm ci && npm run check"
   },
   "dependencies": {
+    "@plasmohq/messaging": "^0.7.1",
     "plasmo": "0.90.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
