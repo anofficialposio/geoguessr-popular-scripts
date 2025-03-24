@@ -19,6 +19,8 @@ ref: https://github.com/miraclewhips/geoguessr-userscripts/blob/master/geoguessr
 - EventFrameworkをコピーして持ってきて、修正
   - `geoguessr-country-streak.ts`を参照。共通で使う
 - unsafeWindowを使っているので、windowを使うように変更
+- GM_addStyleは自前のやつに変更
+- GM_openInTabは自前のやつに変更。引数にwindowが追加されているので注意
 - eslintのエラーを解消
 - GEFをインスタンス化
 
@@ -871,7 +873,7 @@ function createSettingsButtonSummaryEvents() {
     .getElementById("mwgtm-opt-open-maps")
     .addEventListener("click", () => {
       const link = googleMapsLink(LOCATION)
-      GM_openInTab(link, false)
+      GM_openInTab(window, link, false)
     })
 
   document

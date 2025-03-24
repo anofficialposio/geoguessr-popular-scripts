@@ -2,30 +2,14 @@
 // GM APIs
 //
 
-import { sendToBackground } from "@plasmohq/messaging"
-
-// ref: https://github.com/greasemonkey/greasemonkey/blob/8a51d1432e8c1adbd761d2654b030e11efc11b74/src/bg/api-provider-source.js#L184-L199
-export const GM_openInTab = (url: string, openInBackground: boolean) => {
-  const asyncFunc = async () => {
-    // https://docs.plasmo.com/framework/messaging
-    // Your extension's id can be found in chrome's extension manager window once you've built and added it to your browser.
-    // TODO: いや、やっぱり動かんな
-    // https://github.com/PlasmoHQ/plasmo/issues/823
-
-    const res = await sendToBackground({
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      name: `openUrl`,
-      body: {
-        url: url,
-        active: !openInBackground
-      },
-      extensionId: "momdigjeoepdfkbhnhcoifhjpibiodke" // TODO: これはproduction buildでも同じなの? > 違う
-    })
-    console.log("GM_openInTab: res", res)
-  }
-
-  asyncFunc().then()
+export const GM_openInTab = (
+  window: Window,
+  url: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  openInBackground: boolean
+) => {
+  // TODO: focus()を付けても付けなくても前面で開くので、backgroundは無理かも
+  window.open(url, "_blank").focus()
 }
 
 export const GM_addStyle = (document: Document, css: string) => {
