@@ -2,5 +2,13 @@
   "name": {
     "message": "GeoGuessr Popular Scripts",
     "description": "name"
+  },
+  "popup_title": {
+    "message": "GeoGuessr Popular Scripts",
+    "description": "popup/title"
+  },
+  "options_settings_title": {
+    "message": "設定",
+    "description": "options/settings/title"
   }
 }

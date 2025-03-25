@@ -1,24 +1,31 @@
-import React, { useState } from "react"
+import React from "react"
+
+import { Settings } from "./components/Settings"
 
 function IndexPopup() {
-  const [data, setData] = useState("")
-
   return (
     <div
       style={{
-        padding: 16
+        padding: 8,
+        minWidth: 300
       }}>
-      <h2>
-        Welcome to your{" "}
-        <a href="https://www.plasmo.com" target="_blank" rel="noreferrer">
-          Plasmo
-        </a>{" "}
-        Extension!
-      </h2>
-      <input onChange={(e) => setData(e.target.value)} value={data} />
-      <a href="https://docs.plasmo.com" target="_blank" rel="noreferrer">
-        View Docs
-      </a>
+      <p
+        style={{
+          marginBottom: 24,
+          fontSize: 14,
+          fontWeight: "bold"
+        }}>
+        {chrome.i18n.getMessage("popup_title")}
+      </p>
+      <Settings />
+      <p
+        style={{
+          paddingTop: 8
+        }}>
+        <a href="options.html" target="_blank">
+          {chrome.i18n.getMessage("popup_options")}
+        </a>
+      </p>
     </div>
   )
 }
