@@ -25,6 +25,15 @@ export const SCRIPT_INFO: { [key: string]: ScriptInfo } = {
     version: "1.0.0",
     license: "MIT"
   },
+  "geoguessr-games-played-counter": {
+    name: "GeoGuessr Games Played Counter",
+    author: "miraclewhips",
+    url: "https://miraclewhips.dev",
+    description:
+      "Shows how many games you have played and allows you to set a counter (click counter on the game screen to configure)",
+    version: "1.5",
+    license: "MIT"
+  },
   "geoguessr-training-mode": {
     name: "GeoGuessr Training Mode",
     author: "miraclewhips",
